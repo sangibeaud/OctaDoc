@@ -17,9 +17,10 @@ All files are commited to git and difference dumped
 4. from this root directory, run ./octa-sync.sh 
 5. from this root directory, run ./octa-track.sh ; When prompted, describe at has changed (in one line)
 6. eject octatrack drive and leave USB mode
-7. change a single thing 
+7. change a single thing (or many if you dare !) 
 8. go back to 2. above
 
 # Usable result
-The git log  and diff shows what bytes were modified at step 7
+The git log and diff shows what bytes were modified at step 7 (e.g. on Audio Track 1, turn knob B of page SRC clockwise) 
 ![git diff output](./doc/Diff_output_Screenshot.png)
+We now know value for **knob B of page SRC in Audio track 1 of bank 01** is recoded at 0x008ef0a and there's a checksum a the end of the file.
