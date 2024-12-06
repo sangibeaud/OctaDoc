@@ -1,7 +1,7 @@
 source local.cfg
 
 #rsync -vnrc --exclude Base/AUDIO /run/media/stephane/OCTATRACK64/ OT/
-RSYNC_CMD="rsync -vrc --exclude Base/AUDIO $OT_MOUNT/$OT_PROJECT_PATH $DATA_REPOSITORY/"
+RSYNC_CMD="rsync -vrc --exclude Base/AUDIO $OT_MOUNT/$OT_PROJECT_PATH/$OT_PROJECT $DATA_REPOSITORY/"
 
 echo $RSYNC_CMD
 echo 2 secs to cancel \(ctrl-C\)
