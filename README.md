@@ -22,4 +22,4 @@ All files are commited to git and difference dumped
 
 # Usable result
 The git log  and diff shows what bytes were modified at step 7
-![git diff output](./doc/Diff_Output_Sreenshot.pngraw=true)
+![git diff output](./doc/Diff_Output_Screenshot.png?raw=true)
