@@ -2,7 +2,7 @@
 
 This projects aims at documenting the file formats used by the Elektron Octatrack device. 
 
-This is far from a polished or foolproof project. Still WIP. But no write is made to the CF card.
+This is far from a polished or foolproof project. Still WIP. No write is made to the CF card whatsoever.
 
 # General principle
 OT files are synced from CF card to a local copy (in $DATA_REPOSITORY as per local.cfg)
