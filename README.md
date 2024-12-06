@@ -22,5 +22,8 @@ All files are commited to git and difference dumped
 
 # Usable result
 The git log and diff shows what bytes were modified at step 7 (e.g. on Audio Track 1, turn knob B of page SRC clockwise) 
+
 ![git diff output](./doc/Diff_output_Screenshot.png)
+
+
 We now know value for **knob B of page SRC in Audio track 1 of bank 01** is recoded at 0x008ef0a and there's a checksum a the end of the file.
