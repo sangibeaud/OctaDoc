@@ -1,0 +1,13 @@
+#example file for local settings
+#edit this file and change values to reflect your setup
+
+#where the OT gets mounted in USB mode (usually /Volumes/OCTATRACK64 in macos)
+OT_MOUNT=/run/media/imyname/OCTATRACK64
+
+#project under test : project name and path
+#the files on the CF card would be e.g. in /Base/OCTABLIB
+OT_PROJECT=OCTALIB
+OT_PROJECT_PATH=Base
+
+#where to store the local copy of the project
+DATA_REPOSITORY=./OT
