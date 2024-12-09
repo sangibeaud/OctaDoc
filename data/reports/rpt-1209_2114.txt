@@ -1,0 +1,99 @@
+    Set P-Locks to knob B values x 42 43 44 45 on steps 2,3,4,5 of pattern 1, bank 1 (actually part 4). Also saved part 4
+diff --git a/Base/OCTALIB/bank01.strd b/Base/OCTALIB/bank01.strd
+index aec623a..bf70bfd 100755
+Binary files a/Base/OCTALIB/bank01.strd and b/Base/OCTALIB/bank01.strd differ
+diff --git a/Base/OCTALIB/bank01.strd.hexdump b/Base/OCTALIB/bank01.strd.hexdump
+index a1d341b..55eb4c6 100644
+--- a/Base/OCTALIB/bank01.strd.hexdump
++++ b/Base/OCTALIB/bank01.strd.hexdump
+@@ -1,12 +1,20 @@
+ 00000000  46 4f 52 4d 00 00 00 00  44 50 53 31 42 41 4e 4b  |FORM....DPS1BANK|
+ 00000010  00 00 00 00 00 17 50 54  52 4e 00 00 00 00 54 52  |......PTRN....TR|
+-00000020  41 43 00 00 00 00 00 00  00 00 00 00 00 00 01 00  |AC..............|
++00000020  41 43 00 00 00 00 00 00  00 00 00 00 00 00 1f 00  |AC..............|
+ 00000030  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+ *
+ 00000060  00 00 00 00 00 00 00 aa  aa aa aa aa aa aa aa 00  |................|
+ 00000070  00 00 00 00 00 00 00 10  02 00 ff 00 00 00 00 00  |................|
+ 00000080  61 ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |a...............|
+ 00000090  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |................|
++000000a0  ff 2a ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |.*..............|
++000000b0  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |................|
++000000c0  ff 2b ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |.+..............|
++000000d0  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |................|
++000000e0  ff 2c ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |.,..............|
++000000f0  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |................|
++00000100  ff 2d ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |.-..............|
++00000110  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |................|
+ *
+ 00000880  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+ *
+@@ -3408,7 +3416,7 @@
+ 00099bf0  00 00 00 50 41 52 54 00  00 00 00 03 04 04 04 04  |...PART.........|
+ 00099c00  04 04 04 04 08 08 08 08  08 08 08 08 00 08 6c 6c  |..............ll|
+ 00099c10  6c 6c 6c 6c 6c 6c 6c 6c  6c 6c 6c 6c 6c 6c 00 00  |llllllllllllll..|
+-00099c20  00 00 00 00 00 00 40 00  00 7f 00 4f 40 00 00 7f  |......@....O@...|
++00099c20  00 00 00 00 00 00 57 00  00 7f 00 4f 40 00 00 7f  |......W....O@...|
+ 00099c30  00 4f 00 40 00 00 40 00  00 00 00 00 00 00 40 02  |.O.@..@.......@.|
+ 00099c40  01 7f 40 01 40 00 00 7f  00 4f 40 00 00 7f 00 4f  |..@.@....O@....O|
+ 00099c50  00 40 00 00 40 00 00 00  00 00 00 00 40 02 01 7f  |.@..@.......@...|
+@@ -3518,7 +3526,7 @@
+ 0009b430  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+ *
+ 0009b4a0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 01 00  |................|
+-0009b4b0  00 00 08 4f 4e 45 00 58  00 00 54 57 4f 00 4f 52  |...ONE.X..TWO.OR|
+-0009b4c0  00 54 48 52 45 45 00 00  46 4f 55 52 00 4f 00 99  |.THREE..FOUR.O..|
+-0009b4d0  fe                                                |.|
++0009b4b0  00 01 00 4f 4e 45 00 58  00 00 54 57 4f 00 4f 52  |...ONE.X..TWO.OR|
++0009b4c0  00 54 48 52 45 45 00 00  46 4f 55 52 00 4f 00 96  |.THREE..FOUR.O..|
++0009b4d0  de                                                |.|
+ 0009b4d1
+diff --git a/Base/OCTALIB/bank01.work b/Base/OCTALIB/bank01.work
+index aec623a..bf70bfd 100755
+Binary files a/Base/OCTALIB/bank01.work and b/Base/OCTALIB/bank01.work differ
+diff --git a/Base/OCTALIB/bank01.work.hexdump b/Base/OCTALIB/bank01.work.hexdump
+index a1d341b..55eb4c6 100644
+--- a/Base/OCTALIB/bank01.work.hexdump
++++ b/Base/OCTALIB/bank01.work.hexdump
+@@ -1,12 +1,20 @@
+ 00000000  46 4f 52 4d 00 00 00 00  44 50 53 31 42 41 4e 4b  |FORM....DPS1BANK|
+ 00000010  00 00 00 00 00 17 50 54  52 4e 00 00 00 00 54 52  |......PTRN....TR|
+-00000020  41 43 00 00 00 00 00 00  00 00 00 00 00 00 01 00  |AC..............|
++00000020  41 43 00 00 00 00 00 00  00 00 00 00 00 00 1f 00  |AC..............|
+ 00000030  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+ *
+ 00000060  00 00 00 00 00 00 00 aa  aa aa aa aa aa aa aa 00  |................|
+ 00000070  00 00 00 00 00 00 00 10  02 00 ff 00 00 00 00 00  |................|
+ 00000080  61 ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |a...............|
+ 00000090  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |................|
++000000a0  ff 2a ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |.*..............|
++000000b0  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |................|
++000000c0  ff 2b ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |.+..............|
++000000d0  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |................|
++000000e0  ff 2c ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |.,..............|
++000000f0  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |................|
++00000100  ff 2d ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |.-..............|
++00000110  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |................|
+ *
+ 00000880  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+ *
+@@ -3408,7 +3416,7 @@
+ 00099bf0  00 00 00 50 41 52 54 00  00 00 00 03 04 04 04 04  |...PART.........|
+ 00099c00  04 04 04 04 08 08 08 08  08 08 08 08 00 08 6c 6c  |..............ll|
+ 00099c10  6c 6c 6c 6c 6c 6c 6c 6c  6c 6c 6c 6c 6c 6c 00 00  |llllllllllllll..|
+-00099c20  00 00 00 00 00 00 40 00  00 7f 00 4f 40 00 00 7f  |......@....O@...|
++00099c20  00 00 00 00 00 00 57 00  00 7f 00 4f 40 00 00 7f  |......W....O@...|
+ 00099c30  00 4f 00 40 00 00 40 00  00 00 00 00 00 00 40 02  |.O.@..@.......@.|
+ 00099c40  01 7f 40 01 40 00 00 7f  00 4f 40 00 00 7f 00 4f  |..@.@....O@....O|
+ 00099c50  00 40 00 00 40 00 00 00  00 00 00 00 40 02 01 7f  |.@..@.......@...|
+@@ -3518,7 +3526,7 @@
+ 0009b430  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+ *
+ 0009b4a0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 01 00  |................|
+-0009b4b0  00 00 08 4f 4e 45 00 58  00 00 54 57 4f 00 4f 52  |...ONE.X..TWO.OR|
+-0009b4c0  00 54 48 52 45 45 00 00  46 4f 55 52 00 4f 00 99  |.THREE..FOUR.O..|
+-0009b4d0  fe                                                |.|
++0009b4b0  00 01 00 4f 4e 45 00 58  00 00 54 57 4f 00 4f 52  |...ONE.X..TWO.OR|
++0009b4c0  00 54 48 52 45 45 00 00  46 4f 55 52 00 4f 00 96  |.THREE..FOUR.O..|
++0009b4d0  de                                                |.|
+ 0009b4d1
