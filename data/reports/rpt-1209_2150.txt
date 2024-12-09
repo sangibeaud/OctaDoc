@@ -1,0 +1,37 @@
+    Rename all four parts on bank 2.
+diff --git a/Base/OCTALIB/bank02.strd b/Base/OCTALIB/bank02.strd
+index 800ea1f..b5103b3 100755
+Binary files a/Base/OCTALIB/bank02.strd and b/Base/OCTALIB/bank02.strd differ
+diff --git a/Base/OCTALIB/bank02.strd.hexdump b/Base/OCTALIB/bank02.strd.hexdump
+index d938957..9b701a0 100644
+--- a/Base/OCTALIB/bank02.strd.hexdump
++++ b/Base/OCTALIB/bank02.strd.hexdump
+@@ -3517,7 +3517,7 @@
+ 0009b430  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+ *
+ 0009b4a0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 01 01  |................|
+-0009b4b0  01 01 00 55 4e 00 00 58  00 00 44 45 55 58 00 00  |...UN..X..DEUX..|
+-0009b4c0  00 54 52 4f 49 53 00 00  51 55 41 54 52 45 00 9a  |.TROIS..QUATRE..|
+-0009b4d0  06                                                |.|
++0009b4b0  01 01 00 4d 00 00 00 58  00 00 4e 00 00 00 4f 52  |...M...X..N...OR|
++0009b4c0  00 4f 00 00 00 00 00 00  50 00 00 00 00 4f 00 96  |.O......P....O..|
++0009b4d0  f4                                                |.|
+ 0009b4d1
+diff --git a/Base/OCTALIB/bank02.work b/Base/OCTALIB/bank02.work
+index 800ea1f..b5103b3 100755
+Binary files a/Base/OCTALIB/bank02.work and b/Base/OCTALIB/bank02.work differ
+diff --git a/Base/OCTALIB/bank02.work.hexdump b/Base/OCTALIB/bank02.work.hexdump
+index d938957..9b701a0 100644
+--- a/Base/OCTALIB/bank02.work.hexdump
++++ b/Base/OCTALIB/bank02.work.hexdump
+@@ -3517,7 +3517,7 @@
+ 0009b430  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+ *
+ 0009b4a0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 01 01  |................|
+-0009b4b0  01 01 00 55 4e 00 00 58  00 00 44 45 55 58 00 00  |...UN..X..DEUX..|
+-0009b4c0  00 54 52 4f 49 53 00 00  51 55 41 54 52 45 00 9a  |.TROIS..QUATRE..|
+-0009b4d0  06                                                |.|
++0009b4b0  01 01 00 4d 00 00 00 58  00 00 4e 00 00 00 4f 52  |...M...X..N...OR|
++0009b4c0  00 4f 00 00 00 00 00 00  50 00 00 00 00 4f 00 96  |.O......P....O..|
++0009b4d0  f4                                                |.|
+ 0009b4d1

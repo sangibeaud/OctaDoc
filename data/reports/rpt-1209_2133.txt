@@ -1,0 +1,33 @@
+    Renamed Part 1 (or 4 ? ) and saved.
+diff --git a/Base/OCTALIB/bank01.strd b/Base/OCTALIB/bank01.strd
+index 440b5b2..bf70bfd 100755
+Binary files a/Base/OCTALIB/bank01.strd and b/Base/OCTALIB/bank01.strd differ
+diff --git a/Base/OCTALIB/bank01.strd.hexdump b/Base/OCTALIB/bank01.strd.hexdump
+index 3f932e2..55eb4c6 100644
+--- a/Base/OCTALIB/bank01.strd.hexdump
++++ b/Base/OCTALIB/bank01.strd.hexdump
+@@ -3527,6 +3527,6 @@
+ *
+ 0009b4a0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 01 00  |................|
+ 0009b4b0  00 01 00 4f 4e 45 00 58  00 00 54 57 4f 00 4f 52  |...ONE.X..TWO.OR|
+-0009b4c0  00 54 48 52 45 45 00 00  41 00 00 00 00 4f 00 95  |.THREE..A....O..|
+-0009b4d0  e3                                                |.|
++0009b4c0  00 54 48 52 45 45 00 00  46 4f 55 52 00 4f 00 96  |.THREE..FOUR.O..|
++0009b4d0  de                                                |.|
+ 0009b4d1
+diff --git a/Base/OCTALIB/bank01.work b/Base/OCTALIB/bank01.work
+index 440b5b2..bf70bfd 100755
+Binary files a/Base/OCTALIB/bank01.work and b/Base/OCTALIB/bank01.work differ
+diff --git a/Base/OCTALIB/bank01.work.hexdump b/Base/OCTALIB/bank01.work.hexdump
+index 3f932e2..55eb4c6 100644
+--- a/Base/OCTALIB/bank01.work.hexdump
++++ b/Base/OCTALIB/bank01.work.hexdump
+@@ -3527,6 +3527,6 @@
+ *
+ 0009b4a0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 01 00  |................|
+ 0009b4b0  00 01 00 4f 4e 45 00 58  00 00 54 57 4f 00 4f 52  |...ONE.X..TWO.OR|
+-0009b4c0  00 54 48 52 45 45 00 00  41 00 00 00 00 4f 00 95  |.THREE..A....O..|
+-0009b4d0  e3                                                |.|
++0009b4c0  00 54 48 52 45 45 00 00  46 4f 55 52 00 4f 00 96  |.THREE..FOUR.O..|
++0009b4d0  de                                                |.|
+ 0009b4d1

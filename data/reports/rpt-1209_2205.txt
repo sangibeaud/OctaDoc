@@ -1,0 +1,105 @@
+    In part 4, assign  Pickup to T1-T5 and Flex to T6-T8. do not save parts. Save project.
+diff --git a/Base/OCTALIB/bank02.strd b/Base/OCTALIB/bank02.strd
+index 8654439..ee3a036 100755
+Binary files a/Base/OCTALIB/bank02.strd and b/Base/OCTALIB/bank02.strd differ
+diff --git a/Base/OCTALIB/bank02.strd.hexdump b/Base/OCTALIB/bank02.strd.hexdump
+index ef36202..3c2c873 100644
+--- a/Base/OCTALIB/bank02.strd.hexdump
++++ b/Base/OCTALIB/bank02.strd.hexdump
+@@ -2956,7 +2956,7 @@
+ 00093900  00 00 00 00 00 00 00 50  41 52 54 00 00 00 00 03  |.......PART.....|
+ 00093910  04 04 04 04 04 04 04 04  08 08 08 08 08 08 08 08  |................|
+ 00093920  00 08 6c 6c 6c 6c 6c 6c  6c 6c 6c 6c 6c 6c 6c 6c  |..llllllllllllll|
+-00093930  6c 6c 04 04 04 04 04 01  01 01 40 00 00 7f 00 4f  |ll........@....O|
++00093930  6c 6c 01 02 03 04 00 00  00 00 40 00 00 7f 00 4f  |ll........@....O|
+ 00093940  40 00 00 7f 00 4f 00 40  00 00 40 00 00 00 00 00  |@....O.@..@.....|
+ 00093950  00 00 40 02 01 7f 40 01  40 00 00 7f 00 4f 40 00  |..@...@.@....O@.|
+ 00093960  00 7f 00 4f 00 40 00 00  40 00 00 00 00 00 00 00  |...O.@..@.......|
+@@ -3517,7 +3517,7 @@
+ 0009b430  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+ *
+ 0009b4a0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 01 01  |................|
+-0009b4b0  01 01 08 55 4e 00 00 58  00 00 44 45 55 58 00 00  |...UN..X..DEUX..|
++0009b4b0  01 01 00 55 4e 00 00 58  00 00 44 45 55 58 00 00  |...UN..X..DEUX..|
+ 0009b4c0  00 54 52 4f 49 53 00 00  51 55 41 54 52 45 00 9a  |.TROIS..QUATRE..|
+-0009b4d0  2f                                                |/|
++0009b4d0  1a                                                |.|
+ 0009b4d1
+diff --git a/Base/OCTALIB/bank02.work b/Base/OCTALIB/bank02.work
+index 8654439..ee3a036 100755
+Binary files a/Base/OCTALIB/bank02.work and b/Base/OCTALIB/bank02.work differ
+diff --git a/Base/OCTALIB/bank02.work.hexdump b/Base/OCTALIB/bank02.work.hexdump
+index ef36202..3c2c873 100644
+--- a/Base/OCTALIB/bank02.work.hexdump
++++ b/Base/OCTALIB/bank02.work.hexdump
+@@ -2956,7 +2956,7 @@
+ 00093900  00 00 00 00 00 00 00 50  41 52 54 00 00 00 00 03  |.......PART.....|
+ 00093910  04 04 04 04 04 04 04 04  08 08 08 08 08 08 08 08  |................|
+ 00093920  00 08 6c 6c 6c 6c 6c 6c  6c 6c 6c 6c 6c 6c 6c 6c  |..llllllllllllll|
+-00093930  6c 6c 04 04 04 04 04 01  01 01 40 00 00 7f 00 4f  |ll........@....O|
++00093930  6c 6c 01 02 03 04 00 00  00 00 40 00 00 7f 00 4f  |ll........@....O|
+ 00093940  40 00 00 7f 00 4f 00 40  00 00 40 00 00 00 00 00  |@....O.@..@.....|
+ 00093950  00 00 40 02 01 7f 40 01  40 00 00 7f 00 4f 40 00  |..@...@.@....O@.|
+ 00093960  00 7f 00 4f 00 40 00 00  40 00 00 00 00 00 00 00  |...O.@..@.......|
+@@ -3517,7 +3517,7 @@
+ 0009b430  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+ *
+ 0009b4a0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 01 01  |................|
+-0009b4b0  01 01 08 55 4e 00 00 58  00 00 44 45 55 58 00 00  |...UN..X..DEUX..|
++0009b4b0  01 01 00 55 4e 00 00 58  00 00 44 45 55 58 00 00  |...UN..X..DEUX..|
+ 0009b4c0  00 54 52 4f 49 53 00 00  51 55 41 54 52 45 00 9a  |.TROIS..QUATRE..|
+-0009b4d0  2f                                                |/|
++0009b4d0  1a                                                |.|
+ 0009b4d1
+diff --git a/Base/OCTALIB/project.strd b/Base/OCTALIB/project.strd
+index 6a86724..091aee3 100755
+--- a/Base/OCTALIB/project.strd
++++ b/Base/OCTALIB/project.strd
+@@ -84,7 +84,7 @@ PATTERN=0
+ ARRANGEMENT=0
+ ARRANGEMENT_MODE=0
+ PART=3
+-TRACK=7
++TRACK=0
+ TRACK_OTHERMODE=0
+ SCENE_A_MUTE=0
+ SCENE_B_MUTE=0
+diff --git a/Base/OCTALIB/project.strd.hexdump b/Base/OCTALIB/project.strd.hexdump
+index 3bbd08e..645694c 100644
+--- a/Base/OCTALIB/project.strd.hexdump
++++ b/Base/OCTALIB/project.strd.hexdump
+@@ -103,7 +103,7 @@
+ 00000660  0a 41 52 52 41 4e 47 45  4d 45 4e 54 3d 30 0d 0a  |.ARRANGEMENT=0..|
+ 00000670  41 52 52 41 4e 47 45 4d  45 4e 54 5f 4d 4f 44 45  |ARRANGEMENT_MODE|
+ 00000680  3d 30 0d 0a 50 41 52 54  3d 33 0d 0a 54 52 41 43  |=0..PART=3..TRAC|
+-00000690  4b 3d 37 0d 0a 54 52 41  43 4b 5f 4f 54 48 45 52  |K=7..TRACK_OTHER|
++00000690  4b 3d 30 0d 0a 54 52 41  43 4b 5f 4f 54 48 45 52  |K=0..TRACK_OTHER|
+ 000006a0  4d 4f 44 45 3d 30 0d 0a  53 43 45 4e 45 5f 41 5f  |MODE=0..SCENE_A_|
+ 000006b0  4d 55 54 45 3d 30 0d 0a  53 43 45 4e 45 5f 42 5f  |MUTE=0..SCENE_B_|
+ 000006c0  4d 55 54 45 3d 30 0d 0a  54 52 41 43 4b 5f 43 55  |MUTE=0..TRACK_CU|
+diff --git a/Base/OCTALIB/project.work b/Base/OCTALIB/project.work
+index 6a86724..091aee3 100755
+--- a/Base/OCTALIB/project.work
++++ b/Base/OCTALIB/project.work
+@@ -84,7 +84,7 @@ PATTERN=0
+ ARRANGEMENT=0
+ ARRANGEMENT_MODE=0
+ PART=3
+-TRACK=7
++TRACK=0
+ TRACK_OTHERMODE=0
+ SCENE_A_MUTE=0
+ SCENE_B_MUTE=0
+diff --git a/Base/OCTALIB/project.work.hexdump b/Base/OCTALIB/project.work.hexdump
+index 3bbd08e..645694c 100644
+--- a/Base/OCTALIB/project.work.hexdump
++++ b/Base/OCTALIB/project.work.hexdump
+@@ -103,7 +103,7 @@
+ 00000660  0a 41 52 52 41 4e 47 45  4d 45 4e 54 3d 30 0d 0a  |.ARRANGEMENT=0..|
+ 00000670  41 52 52 41 4e 47 45 4d  45 4e 54 5f 4d 4f 44 45  |ARRANGEMENT_MODE|
+ 00000680  3d 30 0d 0a 50 41 52 54  3d 33 0d 0a 54 52 41 43  |=0..PART=3..TRAC|
+-00000690  4b 3d 37 0d 0a 54 52 41  43 4b 5f 4f 54 48 45 52  |K=7..TRACK_OTHER|
++00000690  4b 3d 30 0d 0a 54 52 41  43 4b 5f 4f 54 48 45 52  |K=0..TRACK_OTHER|
+ 000006a0  4d 4f 44 45 3d 30 0d 0a  53 43 45 4e 45 5f 41 5f  |MODE=0..SCENE_A_|
+ 000006b0  4d 55 54 45 3d 30 0d 0a  53 43 45 4e 45 5f 42 5f  |MUTE=0..SCENE_B_|
+ 000006c0  4d 55 54 45 3d 30 0d 0a  54 52 41 43 4b 5f 43 55  |MUTE=0..TRACK_CU|
