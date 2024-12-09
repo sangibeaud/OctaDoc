@@ -1,0 +1,57 @@
+    Saved dirty part 4 (machines changed).Saved project.
+diff --git a/Base/OCTALIB/bank02.strd b/Base/OCTALIB/bank02.strd
+index f3310d2..8654439 100755
+Binary files a/Base/OCTALIB/bank02.strd and b/Base/OCTALIB/bank02.strd differ
+diff --git a/Base/OCTALIB/bank02.strd.hexdump b/Base/OCTALIB/bank02.strd.hexdump
+index 8b6fe37..ef36202 100644
+--- a/Base/OCTALIB/bank02.strd.hexdump
++++ b/Base/OCTALIB/bank02.strd.hexdump
+@@ -3406,8 +3406,8 @@
+ *
+ 00099bf0  00 00 00 50 41 52 54 00  00 00 00 03 04 04 04 04  |...PART.........|
+ 00099c00  04 04 04 04 08 08 08 08  08 08 08 08 00 08 6c 6c  |..............ll|
+-00099c10  6c 6c 6c 6c 6c 6c 6c 6c  6c 6c 6c 6c 6c 6c 04 04  |llllllllllllll..|
+-00099c20  04 04 04 01 01 01 40 00  00 7f 00 4f 40 00 00 7f  |......@....O@...|
++00099c10  6c 6c 6c 6c 6c 6c 6c 6c  6c 6c 6c 6c 6c 6c 01 02  |llllllllllllll..|
++00099c20  03 04 00 00 00 00 40 00  00 7f 00 4f 40 00 00 7f  |......@....O@...|
+ 00099c30  00 4f 00 40 00 00 40 00  00 00 00 00 00 00 40 02  |.O.@..@.......@.|
+ 00099c40  01 7f 40 01 40 00 00 7f  00 4f 40 00 00 7f 00 4f  |..@.@....O@....O|
+ 00099c50  00 40 00 00 40 00 00 00  00 00 00 00 40 02 01 7f  |.@..@.......@...|
+@@ -3517,7 +3517,7 @@
+ 0009b430  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+ *
+ 0009b4a0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 01 01  |................|
+-0009b4b0  01 01 00 55 4e 00 00 58  00 00 44 45 55 58 00 00  |...UN..X..DEUX..|
++0009b4b0  01 01 08 55 4e 00 00 58  00 00 44 45 55 58 00 00  |...UN..X..DEUX..|
+ 0009b4c0  00 54 52 4f 49 53 00 00  51 55 41 54 52 45 00 9a  |.TROIS..QUATRE..|
+-0009b4d0  34                                                |4|
++0009b4d0  2f                                                |/|
+ 0009b4d1
+diff --git a/Base/OCTALIB/bank02.work b/Base/OCTALIB/bank02.work
+index f3310d2..8654439 100755
+Binary files a/Base/OCTALIB/bank02.work and b/Base/OCTALIB/bank02.work differ
+diff --git a/Base/OCTALIB/bank02.work.hexdump b/Base/OCTALIB/bank02.work.hexdump
+index 8b6fe37..ef36202 100644
+--- a/Base/OCTALIB/bank02.work.hexdump
++++ b/Base/OCTALIB/bank02.work.hexdump
+@@ -3406,8 +3406,8 @@
+ *
+ 00099bf0  00 00 00 50 41 52 54 00  00 00 00 03 04 04 04 04  |...PART.........|
+ 00099c00  04 04 04 04 08 08 08 08  08 08 08 08 00 08 6c 6c  |..............ll|
+-00099c10  6c 6c 6c 6c 6c 6c 6c 6c  6c 6c 6c 6c 6c 6c 04 04  |llllllllllllll..|
+-00099c20  04 04 04 01 01 01 40 00  00 7f 00 4f 40 00 00 7f  |......@....O@...|
++00099c10  6c 6c 6c 6c 6c 6c 6c 6c  6c 6c 6c 6c 6c 6c 01 02  |llllllllllllll..|
++00099c20  03 04 00 00 00 00 40 00  00 7f 00 4f 40 00 00 7f  |......@....O@...|
+ 00099c30  00 4f 00 40 00 00 40 00  00 00 00 00 00 00 40 02  |.O.@..@.......@.|
+ 00099c40  01 7f 40 01 40 00 00 7f  00 4f 40 00 00 7f 00 4f  |..@.@....O@....O|
+ 00099c50  00 40 00 00 40 00 00 00  00 00 00 00 40 02 01 7f  |.@..@.......@...|
+@@ -3517,7 +3517,7 @@
+ 0009b430  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+ *
+ 0009b4a0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 01 01  |................|
+-0009b4b0  01 01 00 55 4e 00 00 58  00 00 44 45 55 58 00 00  |...UN..X..DEUX..|
++0009b4b0  01 01 08 55 4e 00 00 58  00 00 44 45 55 58 00 00  |...UN..X..DEUX..|
+ 0009b4c0  00 54 52 4f 49 53 00 00  51 55 41 54 52 45 00 9a  |.TROIS..QUATRE..|
+-0009b4d0  34                                                |4|
++0009b4d0  2f                                                |/|
+ 0009b4d1
