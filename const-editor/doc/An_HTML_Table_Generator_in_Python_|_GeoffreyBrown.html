@@ -1,0 +1,1029 @@
+<!doctype html>
+<html lang="en">
+
+
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="html, python, python3">
+<meta name="description" content="IntroductionWe&#39;re going to roll our own HTML table generator here. Most programmers have had fun at least once in their lives manually writing HTML. Once the practice is mastered, however, it&#39;s not something they want to continue to do - they&#39;re content to let the front-end design people handle it (if even they do any of it manually these days). But sometimes that&#39;s not an option, which is why many Python web frameworks provide HTML generation for forms, tables, and other kinds of markup.">
+<title>An HTML Table Generator in Python | GeoffreyBrown</title>
+<link rel="shortcut icon" href="/static/img/favicon.ico">
+
+
+<link rel="alternate" type="application/rss+xml" title="RSS" href="/blog/feeds/rss/">
+<link rel="alternate" type="application/atom+xml" title="Atom" href="/blog/feeds/atom/">
+
+
+
+<link rel="stylesheet" href="/static/css/bootstrap.css">
+<link rel="stylesheet" href="/static/css/mezzanine.css">
+<!--
+<link rel="stylesheet" href="/static/css/bootstrap-theme.css">
+-->
+
+
+
+
+
+
+<script src="/static/mezzanine/js/jquery-1.8.3.min.js"></script>
+<script src="/static/js/bootstrap.js"></script>
+<script src="/static/js/bootstrap-extras.js"></script>
+
+
+
+<!--[if lt IE 9]>
+<script src="/static/js/html5shiv.js"></script>
+<script src="/static/js/respond.min.js"></script>
+<![endif]-->
+
+
+</head>
+
+<body id="body">
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div class="container">
+<div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle Navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/">GeoffreyBrown</a>
+    
+</div>
+<div class="navbar-collapse collapse">
+    
+<form action="/search/" class="navbar-form navbar-right" role="search">
+
+<div class="form-group">
+    <input class="form-control" placeholder="Search" type="text" name="q" value="">
+</div>
+
+
+    
+    <div class="form-group">
+    <select class="form-control" name="type">
+        <option value="">Everything</option>
+        
+        <option value="blog.BlogPost"
+            >
+            Blog posts
+        </option>
+        
+        <option value="pages.Page"
+            >
+            Pages
+        </option>
+        
+    </select>
+    </div>
+    
+
+
+<input type="submit" class="btn btn-default" value="Go">
+
+</form>
+
+    
+<ul class="nav navbar-nav"><!--
+    <li id="dropdown-menu-home"><a href="/">Home</a></li>
+--><li class="
+               active"
+        id="blog"><a href="/blog/"
+        >
+            Blog
+            
+        </a></li><li class="
+               "
+        id="about"><a href="/about/"
+        >
+            About
+            
+        </a></li></ul>
+
+</div>
+</div>
+</div>
+
+<div class="container">
+
+
+
+
+
+<h1>
+An HTML Table Generator in Python
+</h1>
+
+<ul class="breadcrumb">
+<li id="breadcrumb-menu-home"><a href="/">Home</a></li><li id="breadcrumb-menu-blog"><a href="/blog/">Blog</a></li><li class="active">An HTML Table Generator in Python</li>
+</ul>
+
+</div>
+
+<div class="container">
+<div class="row">
+
+<!--
+<div class="col-md-2 left">
+    
+    <div class="panel panel-default tree">
+
+<ul class="nav nav-list navlist-menu-level-0"><li id="tree-menu-home"><a href="/">Home</a></li><li class="
+    
+     active-branch
+    " id="tree-menu-blog"><a href="/blog/">Blog</a></li><li class="
+    
+    
+    " id="tree-menu-about"><a href="/about/">About</a></li></ul>
+</div>
+    
+</div>
+-->
+
+<div class="col-md-9 middle">
+    
+
+
+
+<h6 class="post-meta">
+    Posted by:
+    
+    <a href="/blog/author/root/">Keith Brown</a>
+    
+    <!--
+    6 years, 9 months ago
+    -->
+</h6>
+
+
+
+<p>
+    
+</p>
+
+
+
+
+
+
+
+
+
+
+<h3>Introduction</h3>
+<p>We're going to roll our own HTML table generator here. Most programmers have had fun at least once in their lives manually writing HTML. Once the practice is mastered, however, it's not something they want to continue to do - they're content to let the front-end design people handle it (if even <em>they</em> do any of it manually these days). But sometimes that's not an option, which is why many Python web frameworks provide HTML generation for forms, tables, and other kinds of markup.</p>
+<p>We'll write an HTML table generator here to illustrate some interesting Python concepts such as decorators, closures, and context managers. </p>
+<p>We'll be using Python 3 on Ubuntu.</p>
+<h3>Background - Decorators and Closures</h3>
+<p>We're going to use a <em>decorator</em> function to implement our table generator. A Python decorator (no relationship to the Decorator pattern) generally is a <em>callable</em> that accepts a function and then returns a function that calls the passed-in function. The returned function generally calls the passed-in function as one part of doing its job. If the name of the passed-in function is rebound to the function returned from the decorator, then the passed-in function is no longer directly callable - it's only callable indirectly by calling the returned function. In a sense it has been <em>transformed</em> or <em>wrapped</em> or <em>decorated</em>.</p>
+<p>It's easier to demonstrate than to explain - we'll do it here with a decorator <em>function</em> (although a decorator <em>class</em> is also possible).</p>
+<pre><code>&gt;&gt;&gt; def d(f):                      # d is the decorator function
+...     def c():
+...         print("entering")
+...         f()
+...         print("exiting")
+...     return c
+... 
+&gt;&gt;&gt; def f():                       # f is the passed in function
+...     print("hello world")
+... 
+&gt;&gt;&gt; f()
+hello world
+&gt;&gt;&gt; f = d(f)                       # manually decorate f
+&gt;&gt;&gt; f()
+entering
+hello world
+exiting
+</code></pre>
+
+<p>Using Python's decorator syntax makes the decoration step simpler.</p>
+<pre><code>&gt;&gt;&gt; def d(f):                      # d is the decorator function
+...     def c():
+...         print("entering")
+...         f()
+...         print("exiting")
+...     return c
+... 
+&gt;&gt;&gt; @d                             # automagically decorate f
+... def f():                       # f is the passed in function
+...     print("hello world")
+... 
+&gt;&gt;&gt; f()
+entering
+hello world
+exiting
+</code></pre>
+
+<p>We've named the nested and returned function in the above example <code>c</code> because it's a <em>closure</em>. A closure is a function containing a reference to an object in an enclosing namespace that existed when the function was created i.e. it's a function with state. A closure is usually created by defining a function inside another function with the inner function referencing free i.e. non-local variables and with the inner function serving as the return value of the outer function. The returned function is said to be <em>closed</em> over its free variables and called a closure and the enclosing namespace persists along with the closure.</p>
+<p>When used in a decorator scenario, the closure holds a reference to the function passed to the decorator - that's how the closure can call the passed-in function.</p>
+<h3>Getting Started</h3>
+<p>We'll use a decorator in the same way that a lot of Python web frameworks do - the function being decorated must be "filled in" by the user in order to allow the framework to do its job. This is how a framework implements a kind of inversion-of-control (IoC).</p>
+<p>In our case, the function must provide the data to be displayed in the table and a logical table definition. We'll simulate a database call here and explicitly create a tuple of dictionaries for our data. The logical table definition is also a tuple of dictionaries that specifies the HTML table column name and the database column name of each column to display in the table. The "protocol" key is used to create certain kinds of links within the table. We'll simply use <code>print</code> to display the resulting output, although we'd normally use this code to write a response on the backend. So we'll start <code>tg.py</code> with:</p>
+<pre><code>def gettable():
+
+    data = (
+        {"id":"1", "name":"homer", "fullname":"Homer Simpson", "company":"Simpson Inc.", "orgunit":"", "external":"No", "email":"homer@simpson.biz"},
+        {"id":"2", "name":"marge", "fullname":"Marge Simpson", "company":"Simpson Inc.", "orgunit":"", "external":"No", "email":"marge@simpson.biz"},
+    )
+
+    return (
+        data,
+        (
+            {"prompt":"Name", "name":"name", "protocol":"id"},
+            {"prompt":"Full Name", "name":"fullname"},
+            {"prompt":"Company", "name":"company"},
+            {"prompt":"Organizational Unit", "name":"orgunit"},
+            {"prompt":"External", "name":"external"},
+            {"prompt":"e-Mail Address", "name":"email", "protocol":"mailto"},
+        ),
+    )
+
+print(gettable())
+</code></pre>
+
+<pre><code>$ python3 tg.py
+(({'id': '1', 'name': 'homer', 'fullname': 'Homer Simpson', 'company': 'Simpson Inc.', 'orgunit': '', 'external': 'No', 'email': 'homer@simpson.biz'}, {'id': '2', 'name': 'marge', 'fullname': 'Marge Simpson', 'company': 'Simpson Inc.', 'orgunit': '', 'external': 'No', 'email': 'marge@simpson.biz'}), ({'prompt': 'Name', 'name': 'name', 'protocol': 'id'}, {'prompt': 'Full Name', 'name': 'fullname'}, {'prompt': 'Company', 'name': 'company'}, {'prompt': 'Organizational Unit', 'name': 'orgunit'}, {'prompt': 'External', 'name': 'external'}, {'prompt': 'e-Mail Address', 'name': 'email', 'protocol': 'mailto'}))
+</code></pre>
+
+<p>Calling <code>print(gettable())</code> at this point simply displays the returned tuples. That's because we haven't yet decorated the function.</p>
+<h3>Generating the Table - The Decorator</h3>
+<p>Our decorator function <code>gentable</code> is straightforward - we call <code>gettable</code> to get the data and logical table definition that we need to do the job and then write our markup. We use an <code>io.StringIO</code> object for output to avoid string concatenation. We use Python 3.6's <em>f-strings</em> for formatted output. We don't do any styling. The closure simply returns the markup. We'll leave our body empty for now - we want to tackle that with a context manager.</p>
+<pre><code>import io
+
+def gentable(f):
+    def c():
+        data, tabdef = f()
+
+        out = io.StringIO()
+        write = out.write   # avoid dots
+
+        #####
+        #
+        # table
+        #
+        write("&lt;table&gt;\n")
+        write("&lt;colgroup&gt;&lt;col/&gt;&lt;/colgroup&gt;\n")
+
+        #####
+        #
+        # thead
+        #
+        write("&lt;thead&gt;\n")
+        write("&lt;tr&gt;\n")
+        write("&lt;td/&gt;\n")
+
+        for coldef in tabdef:
+            write(f"""&lt;td&gt;{coldef["prompt"]}&lt;/td&gt;\n""")
+
+        write("&lt;/tr&gt;\n")
+        write("&lt;/thead&gt;\n")
+        #
+        # thead
+        #
+        #####
+
+
+        #####
+        #
+        # tfoot
+        #
+        write("&lt;tfoot&gt;\n")
+        write(f"""&lt;td colspan="{len(tabdef)}"&gt;{len(data)} object(s)&lt;/td&gt;\n""")
+        write("&lt;/tfoot&gt;\n")
+        #
+        # tfoot
+        #
+        #####
+
+        #####
+        #
+        # tbody
+        #
+        write("&lt;tbody&gt;\n")
+
+        write("&lt;/tbody&gt;\n")
+        #
+        # tbody
+        #
+        #####
+
+        write("&lt;/table&gt;\n")
+        #
+        # table
+        #
+        #####
+
+        return out.getvalue()
+    return c
+
+@gentable
+def gettable():
+
+    data = (
+        {"id":"1", "name":"homer", "fullname":"Homer Simpson", "company":"Simpson Inc.", "orgunit":"", "external":"No", "email":"homer@simpson.biz"},
+        {"id":"2", "name":"marge", "fullname":"Marge Simpson", "company":"Simpson Inc.", "orgunit":"", "external":"No", "email":"marge@simpson.biz"},
+    )
+
+    return (
+        data,
+        (
+            {"prompt":"Name", "name":"name", "protocol":"id", "key":"name"},
+            {"prompt":"Full Name", "name":"fullname", "key":"fullname"},
+            {"prompt":"Company", "name":"company", "key":"company"},
+            {"prompt":"Organizational Unit", "name":"orgunit", "key":"orgunit;name"},
+            {"prompt":"External", "name":"external", "key":"external"},
+            {"prompt":"e-Mail Address", "name":"email", "protocol":"mailto", "key":"email"},
+        ),
+    )
+
+print(gettable())
+</code></pre>
+
+<pre><code>$ python3 tg.py
+&lt;table&gt;
+&lt;colgroup&gt;&lt;col/&gt;&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;td/&gt;
+&lt;td&gt;Name&lt;/td&gt;
+&lt;td&gt;Full Name&lt;/td&gt;
+&lt;td&gt;Company&lt;/td&gt;
+&lt;td&gt;Organizational Unit&lt;/td&gt;
+&lt;td&gt;External&lt;/td&gt;
+&lt;td&gt;e-Mail Address&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tfoot&gt;
+&lt;td colspan="6"&gt;2 object(s)&lt;/td&gt;
+&lt;/tfoot&gt;
+&lt;tbody&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</code></pre>
+
+<h3>Generating the Rows - The Context Manager</h3>
+<p>We'll use a <code>with</code> statement and a <em>context manager</em> object of class <code>Rowgen</code> to generate each row of the table body. We could do this directly in <code>gentable</code>, but doing it this way is more interesting :) and it keeps the code in <code>gentable</code> more generic.</p>
+<p>The <code>with</code> statement requires an object that can function as a context manager, i.e. an object of a class that defines <code>__enter__</code> and <code>__exit__</code> methods that get called automatically before and after the execution of the code in the <code>with</code> suite (block). These methods thus effectively function as wrapper methods. This is similar to the wrapping offered by decorators, and in fact a context manager can be used as a decorator.</p>
+<p>We pass the logical table definition to a <code>Rowgen</code> object in the constructor call. We then loop through our data and pass each row to the public <code>markup</code> method, where most of the work is done. The <code>__enter__</code> and <code>__exit__</code> methods simply provide the <code>&amp;lt;tr&gt;</code> and <code>&lt;/tr&amp;gt;</code> tags. We use the <code>html</code> and <code>urllib.parse</code> modules to handle escaping and quoting (note: some JavaScript code isn't shown).</p>
+<pre><code>import io
+import html
+import urllib.parse
+
+class Rowgen():
+
+    def __init__(self, tabdef):
+        self.__tabdef = tabdef
+        self.__markup = ""
+
+    def __enter__(self):
+        self.__markup += "&lt;tr&gt;\n"
+        return self
+
+    def __exit__(self, *exc):
+        self.__markup += "&lt;/tr&gt;\n"
+        return False
+
+    def setmarkup(self, row):
+
+        self.__markup += f"""&lt;td&gt;&lt;input type="checkbox" onclick="updateidlist(this.checked, '{row["id"]}')"&gt;&lt;/td&gt;\n"""
+
+        for coldef in self.__tabdef:
+
+            if "protocol" not in coldef or coldef["protocol"] == "":
+                self.__markup += f"""&lt;td&gt;{html.escape(row[coldef["name"]])}&lt;/td&gt;\n"""
+
+            elif coldef["protocol"] == "id":
+                self.__markup += f"""&lt;td&gt;&lt;a onclick="location = './user/{row["id"]}'; return false;" href=""&gt;{html.escape(row[coldef["name"]])}&lt;/a&gt;&lt;td&gt;\n"""
+
+            elif coldef["protocol"] == "mailto":
+                self.__markup += f"""&lt;td&gt;&lt;a href="mailto:{urllib.parse.quote(row[coldef["name"]])}" target="_blank"&gt;{html.escape(row[coldef["name"]])}&lt;/a&gt;&lt;/td&gt;\n"""
+
+    def getmarkup(self):
+        return self.__markup
+
+
+def gentable(f):
+    def closure():
+        data, tabdef = f()
+
+        out = io.StringIO()
+        write = out.write
+
+        #####
+        #
+        # table
+        #
+        write("&lt;table&gt;\n")
+        write("&lt;colgroup&gt;&lt;col/&gt;&lt;/colgroup&gt;\n")
+
+        #####
+        #
+        # thead
+        #
+        write("&lt;thead&gt;\n")
+        write("&lt;tr&gt;\n")
+        write("&lt;td/&gt;\n")
+
+        for coldef in tabdef:
+            write(f"""&lt;td&gt;{coldef["prompt"]}&lt;/td&gt;\n""")
+
+        write("&lt;/tr&gt;\n")
+        write("&lt;/thead&gt;\n")
+        #
+        # thead
+        #
+        #####
+
+
+        #####
+        #
+        # tfoot
+        #
+        write("&lt;tfoot&gt;\n")
+        write(f"""&lt;td colspan="{len(tabdef)}"&gt;{len(data)} object(s)&lt;/td&gt;\n""")
+        write("&lt;/tfoot&gt;\n")
+        #
+        # tfoot
+        #
+        #####
+
+        #####
+        #
+        # tbody
+        #
+        write("&lt;tbody&gt;\n")
+
+        with Rowgen(tabdef) as rg:
+            for row in data:
+                rg.setmarkup(row)
+                write(rg.getmarkup())
+
+        write("&lt;/tbody&gt;\n")
+        #
+        # tbody
+        #
+        #####
+
+        write("&lt;/table&gt;\n")
+        #
+        # table
+        #
+        #####
+
+        return out.getvalue()
+    return closure
+
+@gentable
+def gettable():
+
+    data = (
+        {"id":"1", "name":"homer", "fullname":"Homer Simpson", "company":"Simpson Inc.", "orgunit":"", "external":"No", "email":"homer@simpson.biz"},
+        {"id":"2", "name":"marge", "fullname":"Marge Simpson", "company":"Simpson Inc.", "orgunit":"", "external":"No", "email":"marge@simpson.biz"},
+    )
+
+    return (
+        data,
+        (
+            {"prompt":"Name", "name":"name", "protocol":"id", "key":"name"},
+            {"prompt":"Full Name", "name":"fullname", "key":"fullname"},
+            {"prompt":"Company", "name":"company", "key":"company"},
+            {"prompt":"Organizational Unit", "name":"orgunit", "key":"orgunit;name"},
+            {"prompt":"External", "name":"external", "key":"external"},
+            {"prompt":"e-Mail Address", "name":"email", "protocol":"mailto", "key":"email"},
+        ),
+    )
+
+print(gettable())
+</code></pre>
+
+<pre><code>$ python3 tg.py
+&lt;table&gt;
+&lt;colgroup&gt;&lt;col/&gt;&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;td/&gt;
+&lt;td&gt;Name&lt;/td&gt;
+&lt;td&gt;Full Name&lt;/td&gt;
+&lt;td&gt;Company&lt;/td&gt;
+&lt;td&gt;Organizational Unit&lt;/td&gt;
+&lt;td&gt;External&lt;/td&gt;
+&lt;td&gt;e-Mail Address&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tfoot&gt;
+&lt;td colspan="6"&gt;2 object(s)&lt;/td&gt;
+&lt;/tfoot&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;input type="checkbox" onclick="updateidlist(this.checked, '1')"&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a onclick="location = './user/1'; return false;" href=""&gt;homer&lt;/a&gt;&lt;td&gt;
+&lt;td&gt;Homer Simpson&lt;/td&gt;
+&lt;td&gt;Simpson Inc.&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&lt;a href="mailto:homer%40simpson.biz" target="_blank"&gt;&gt;homer@simpson.biz&lt;/a&gt;&lt;/td&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;input type="checkbox" onclick="updateidlist(this.checked, '1')"&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a onclick="location = './user/1'; return false;" href=""&gt;homer&lt;/a&gt;&lt;td&gt;
+&lt;td&gt;Homer Simpson&lt;/td&gt;
+&lt;td&gt;Simpson Inc.&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&lt;a href="mailto:homer%40simpson.biz" target="_blank"&gt;homer@simpson.biz&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;input type="checkbox" onclick="updateidlist(this.checked, '2')"&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a onclick="location = './user/2'; return false;" href=""&gt;marge&lt;/a&gt;&lt;td&gt;
+&lt;td&gt;Marge Simpson&lt;/td&gt;
+&lt;td&gt;Simpson Inc.&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&lt;a href="mailto:marge%40simpson.biz" target="_blank"&gt;marge@simpson.biz&lt;/a&gt;&lt;/td&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</code></pre>
+
+<p>And there we are. An HTML table generator in Python.</p>
+
+
+
+
+
+
+<ul class="list-inline tags"><li>Tags:</li><li><a href="/blog/tag/html/">html</a>, </li><li><a href="/blog/tag/python/">python</a>, </li><li><a href="/blog/tag/python3/">python3</a></li></ul>
+
+
+
+
+<div class="panel panel-default rating">
+    <div class="panel-body">
+    
+
+<span id="rating-12">
+    
+    Current rating: 3
+    
+</span>
+
+
+<form class="form-inline" role="form" method="post" action="/rating/">
+    
+    <input type='hidden' name='csrfmiddlewaretoken' value='zQd3YE8Pws4uraeetWBMi7iNQMgbIotsavtARxZnk9R4LYCBeiCgDuMdLq2bLRlq' />
+    
+    <ul class="radio radio-inline"><li> <ul id="id_value"><li><label for="id_value_0"><input id="id_value_0" name="value" type="radio" value="1" required /> 1</label></li>
+<li><label for="id_value_1"><input id="id_value_1" name="value" type="radio" value="2" required /> 2</label></li>
+<li><label for="id_value_2"><input id="id_value_2" name="value" type="radio" value="3" required /> 3</label></li>
+<li><label for="id_value_3"><input id="id_value_3" name="value" type="radio" value="4" required /> 4</label></li>
+<li><label for="id_value_4"><input id="id_value_4" name="value" type="radio" value="5" required /> 5</label></li></ul><input id="id_content_type" name="content_type" type="hidden" value="blog.blogpost" /><input id="id_object_pk" name="object_pk" type="hidden" value="12" /><input id="id_timestamp" name="timestamp" type="hidden" value="1733743356" /><input id="id_security_hash" maxlength="40" minlength="40" name="security_hash" type="hidden" value="66c8443c8dd9b3f1de0024888aeb546203f70fa9" /></li></ul>
+    <input type="submit" class="btn btn-default btn-sm" value="Rate"
+        onclick="return $(this.form).find('input:checked').length == 1;">
+</form>
+
+
+    </div>
+</div>
+
+
+
+
+<a class="btn btn-sm share-twitter" target="_blank" href="https://twitter.com/intent/tweet?url=https%3A//www.geoffreybrown.com/blog/an-html-table-generator-in-python/&amp;text=An%20HTML%20Table%20Generator%20in%20Python">Share on Twitter</a>
+<a class="btn btn-sm share-facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.geoffreybrown.com/blog/an-html-table-generator-in-python/">Share on Facebook</a>
+
+
+
+<ul class="pager">
+
+
+<li class="previous">
+    <a href="/blog/a-hexdump-program-in-python/">&larr; A Hexdump Program in Python</a>
+</li>
+
+
+
+
+<li class="next">
+    <a href="/blog/django/">A Basic Django 2.0 Tutorial (Part 1) &rarr;</a>
+</li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="col-md-3 right">
+<!--
+    
+    
+<div class="panel panel-default user-panel">
+<div class="panel-body">
+
+
+</div>
+</div>
+
+    
+-->
+    <div class="panel panel-default">
+    <div class="panel-body">
+    
+
+
+<!--
+
+
+
+<h3>Recent Posts:</h3>
+<ul class="list-unstyled recent-posts">
+
+<li>
+    <a href="/blog/python-object-model/">
+        
+    Making Sense of Python&#39;s Object Model
+    </a>
+</li>
+
+<li>
+    <a href="/blog/django/">
+        
+    A Basic Django 2.0 Tutorial (Part 1)
+    </a>
+</li>
+
+<li>
+    <a href="/blog/an-html-table-generator-in-python/">
+        
+    An HTML Table Generator in Python
+    </a>
+</li>
+
+<li>
+    <a href="/blog/a-hexdump-program-in-python/">
+        
+    A Hexdump Program in Python
+    </a>
+</li>
+
+<li>
+    <a href="/blog/python-and-mysqldb/">
+        
+    Python and MySQLdb
+    </a>
+</li>
+
+</ul>
+
+
+-->
+
+<!--
+
+
+
+<h3>Archive</h3>
+
+    
+        
+        <h6>2018</h6><ul class="list-unstyled">
+    
+    <li><a href="/blog/archive/2018/3/"
+        >March</a> (1)</li>
+
+    
+    <li><a href="/blog/archive/2018/2/"
+        >February</a> (3)</li>
+
+    
+    <li><a href="/blog/archive/2018/1/"
+        >January</a> (2)</li>
+
+    
+        </ul>
+        <h6>2014</h6><ul class="list-unstyled">
+    
+    <li><a href="/blog/archive/2014/3/"
+        >March</a> (1)</li>
+
+    
+        </ul>
+        <h6>2013</h6><ul class="list-unstyled">
+    
+    <li><a href="/blog/archive/2013/12/"
+        >December</a> (1)</li>
+
+    
+    <li><a href="/blog/archive/2013/11/"
+        >November</a> (1)</li>
+
+    
+    <li><a href="/blog/archive/2013/10/"
+        >October</a> (1)</li>
+
+    
+    <li><a href="/blog/archive/2013/9/"
+        >September</a> (1)</li>
+
+    
+    <li><a href="/blog/archive/2013/7/"
+        >July</a> (1)</li>
+
+    
+    <li><a href="/blog/archive/2013/6/"
+        >June</a> (1)</li>
+
+</ul>
+
+
+-->
+
+
+
+
+<h3>Categories</h3>
+<ul class="list-unstyled">
+
+<li><a href="/blog/category/apache/"
+    >apache</a> (2)</li>
+
+<li><a href="/blog/category/bash/"
+    >bash</a> (1)</li>
+
+<li><a href="/blog/category/characters/"
+    >characters</a> (3)</li>
+
+<li><a href="/blog/category/django/"
+    >django</a> (1)</li>
+
+<li><a href="/blog/category/editors/"
+    >editors</a> (1)</li>
+
+<li><a href="/blog/category/fastcgi/"
+    >fastcgi</a> (2)</li>
+
+<li><a href="/blog/category/linux/"
+    >linux</a> (3)</li>
+
+<li><a href="/blog/category/mysql/"
+    >mysql</a> (1)</li>
+
+<li><a href="/blog/category/postgresql/"
+    >postgresql</a> (1)</li>
+
+<li><a href="/blog/category/python/"
+    >python</a> (8)</li>
+
+<li><a href="/blog/category/python3/"
+    >python3</a> (8)</li>
+
+<li><a href="/blog/category/tutorial/"
+    >tutorial</a> (10)</li>
+
+<li><a href="/blog/category/ubuntu/"
+    >ubuntu</a> (5)</li>
+
+</ul>
+
+
+
+
+
+
+<h3>Tags</h3>
+<ul class="list-inline tag-cloud">
+
+<li>
+    <a href="/blog/tag/mysql/"
+        class="tag-weight-1">mysql</a>
+    (1)
+</li>
+
+<li>
+    <a href="/blog/tag/object-model/"
+        class="tag-weight-1">object model</a>
+    (1)
+</li>
+
+<li>
+    <a href="/blog/tag/tutorial/"
+        class="tag-weight-4">tutorial</a>
+    (10)
+</li>
+
+<li>
+    <a href="/blog/tag/editors/"
+        class="tag-weight-1">editors</a>
+    (1)
+</li>
+
+<li>
+    <a href="/blog/tag/postgresql/"
+        class="tag-weight-2">postgresql</a>
+    (3)
+</li>
+
+<li>
+    <a href="/blog/tag/modfastcgi/"
+        class="tag-weight-1">modfastcgi</a>
+    (2)
+</li>
+
+<li>
+    <a href="/blog/tag/characters/"
+        class="tag-weight-2">characters</a>
+    (3)
+</li>
+
+<li>
+    <a href="/blog/tag/typography/"
+        class="tag-weight-1">typography</a>
+    (1)
+</li>
+
+<li>
+    <a href="/blog/tag/mysql-connector-python/"
+        class="tag-weight-1">mysql-connector-python</a>
+    (1)
+</li>
+
+<li>
+    <a href="/blog/tag/python/"
+        class="tag-weight-4">python</a>
+    (9)
+</li>
+
+<li>
+    <a href="/blog/tag/bash/"
+        class="tag-weight-1">bash</a>
+    (1)
+</li>
+
+<li>
+    <a href="/blog/tag/flup/"
+        class="tag-weight-1">flup</a>
+    (1)
+</li>
+
+<li>
+    <a href="/blog/tag/fastcgi/"
+        class="tag-weight-1">fastcgi</a>
+    (2)
+</li>
+
+<li>
+    <a href="/blog/tag/character-code/"
+        class="tag-weight-1">character code</a>
+    (2)
+</li>
+
+<li>
+    <a href="/blog/tag/fonts/"
+        class="tag-weight-1">fonts</a>
+    (1)
+</li>
+
+<li>
+    <a href="/blog/tag/object/"
+        class="tag-weight-1">object</a>
+    (1)
+</li>
+
+<li>
+    <a href="/blog/tag/character-encoding/"
+        class="tag-weight-1">character encoding</a>
+    (2)
+</li>
+
+<li>
+    <a href="/blog/tag/python3/"
+        class="tag-weight-4">python3</a>
+    (9)
+</li>
+
+<li>
+    <a href="/blog/tag/linux/"
+        class="tag-weight-2">linux</a>
+    (4)
+</li>
+
+<li>
+    <a href="/blog/tag/django/"
+        class="tag-weight-1">django</a>
+    (2)
+</li>
+
+<li>
+    <a href="/blog/tag/time/"
+        class="tag-weight-1">time</a>
+    (1)
+</li>
+
+<li>
+    <a href="/blog/tag/html/"
+        class="tag-weight-1">html</a>
+    (1)
+</li>
+
+<li>
+    <a href="/blog/tag/psycopg/"
+        class="tag-weight-1">psycopg</a>
+    (1)
+</li>
+
+<li>
+    <a href="/blog/tag/ubuntu/"
+        class="tag-weight-3">ubuntu</a>
+    (8)
+</li>
+
+<li>
+    <a href="/blog/tag/apache/"
+        class="tag-weight-2">apache</a>
+    (4)
+</li>
+
+</ul>
+
+
+
+
+
+
+<h3>Authors</h3>
+<ul class="list-unstyled">
+
+    <li><a href="/blog/author/root/"
+        >Keith Brown</a>
+        (13)</li>
+
+</ul>
+
+
+
+
+<h3>Feeds</h3>
+
+
+
+
+    <a href="/blog/feeds/rss/">RSS</a> /
+    <a href="/blog/feeds/atom/">Atom</a>
+
+
+
+
+    </div>
+    </div>
+</div>
+
+</div>
+</div>
+
+<footer>
+<div class="container">
+<!--
+
+
+<div class="nav-footer"><ul class="list-unstyled"><li class="active"
+            id="footer-menu-blog"><a href="/blog/">Blog</a></li></ul><ul class="list-unstyled"><li 
+            id="footer-menu-about"><a href="/about/">About</a></li></ul></div>
+
+-->
+
+<div class="row">
+<p class="site-info text-center">
+    Powered by
+    <a href="http://mezzanine.jupo.org">Mezzanine</a>
+    and
+    <a href="http://www.djangoproject.com">Django</a>
+    <span class="separator">|</span>
+    Theme by <a target="_blank" href="http://getbootstrap.com">Bootstrap</a>
+    
+</p>
+</div>
+</div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
